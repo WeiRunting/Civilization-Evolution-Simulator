@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* 阶段主题令牌：由 App 根据当前文明阶段动态覆盖 */
+  --stage-from: #6e8bff;
+  --stage-to: #22d3ee;
+  --stage-glow: rgba(110, 139, 255, 0.32);
+  --stage-nebula-a: rgba(110, 139, 255, 0.16);
+  --stage-nebula-b: rgba(34, 211, 238, 0.12);
+  --stage-grid: rgba(255, 255, 255, 0.035);
+
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: #eaf0ff;
+  font-family: 'Source Han Sans SC', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  background-color: #070b18;
+  background-image:
+    radial-gradient(circle at 14% 12%, var(--stage-nebula-a) 0%, transparent 46%),
+    radial-gradient(circle at 84% 26%, var(--stage-nebula-b) 0%, transparent 42%),
+    radial-gradient(circle at 52% 92%, var(--stage-nebula-a) 0%, transparent 50%),
+    linear-gradient(180deg, #070b18 0%, #0d1428 46%, #131c36 100%);
+  background-attachment: fixed;
+  transition: background-image 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 极淡网格纹理层 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, var(--stage-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--stage-grid) 1px, transparent 1px);
+  background-size: 62px 62px;
+  transition: background-image 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+@layer components {
+  .glass {
+    @apply relative rounded-panel border border-glass-line bg-white/[0.06] shadow-glass backdrop-blur-xl;
+  }
+
+  .glass-soft {
+    @apply relative rounded-panel border border-white/10 bg-white/[0.04] backdrop-blur-lg;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 ease-ease-out-soft hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.09] hover:shadow-glow;
+  }
+
+  .neon-text {
+    background: linear-gradient(92deg, var(--stage-from), var(--stage-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/12 bg-white/[0.05] px-3 py-1.5 text-[13px] text-ink-0 transition-all duration-200 ease-ease-out-soft hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.1] hover:shadow-glow-cyan active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/60;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg border px-3 py-1.5 text-[13px] font-medium text-void-0 transition-all duration-200 ease-ease-out-soft hover:-translate-y-0.5 hover:shadow-glow active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50;
+    background-image: linear-gradient(92deg, var(--stage-from), var(--stage-to));
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .chip {
+    @apply inline-flex cursor-pointer items-center gap-1 rounded-full border border-white/12 bg-white/[0.05] px-2.5 py-1 text-[12px] text-ink-1 transition-all duration-200 hover:border-white/28 hover:text-ink-0 active:scale-[0.97];
+  }
+
+  .chip-active {
+    @apply border-transparent text-void-0 shadow-glow;
+    background-image: linear-gradient(92deg, var(--stage-from), var(--stage-to));
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-white/12 bg-black/25 px-3 py-1.5 text-[13px] text-ink-0 outline-none transition-colors duration-200 placeholder:text-ink-2 focus:border-neon-cyan/70 focus:bg-black/35 focus:shadow-[0_0_0_3px_rgba(34,211,238,0.14)];
+  }
+
+  .label-xs {
+    @apply text-[11px] uppercase tracking-[0.16em] text-ink-2;
+  }
+
+  .divider-x {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent;
+  }
+}
+
+/* 滑块：深空玻璃上的霓虹轨道 */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 2px solid var(--slider-color, #6e8bff);
+  box-shadow: 0 0 14px var(--slider-glow, rgba(110, 139, 255, 0.65));
+  transition: transform 160ms ease;
+}
+
+input[type='range']:hover::-webkit-slider-thumb {
+  transform: scale(1.12);
+}
+
+input[type='range']:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px var(--slider-glow, rgba(110, 139, 255, 0.4));
+}
+
+input[type='range']::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 2px solid var(--slider-color, #6e8bff);
+  box-shadow: 0 0 14px var(--slider-glow, rgba(110, 139, 255, 0.65));
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transform: none !important;
+  }
+}
