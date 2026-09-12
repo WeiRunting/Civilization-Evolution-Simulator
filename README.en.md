@@ -2,6 +2,8 @@
 
 [简体中文](./README.md) | **English**
 
+**Live demo: <https://civilization-evolution-simulator.vercel.app/>** — no installation required.
+
 A god-view civilization simulation console. The era starts from the **contemporary information society of 2026 AD**, and multiple
 civilization bodies evolve on their own, driven by five dimensions: **Morality (德), Intellect (智), Physique (体), Aesthetics (美) and Labor (劳)**.
 At any time you can issue an "Oracle" to adjust the five dimensions and population, inspect the legal systems and moral constraints that
@@ -77,6 +79,8 @@ Alternatively, use `Code → Download ZIP` on the repository page, extract the a
 The `dist/` folder produced by `npm run build` contains **pure static files** and can be hosted anywhere.
 
 - **Vercel**: import the repository, it auto-detects Vite. Build Command `npm run build`, Output Directory `dist` — zero config.
+  This project is deployed there: <https://civilization-evolution-simulator.vercel.app/>. Every push to `main` rebuilds and redeploys it automatically.
+  Note: `*.vercel.app` access can be unreliable in mainland China; bind a custom domain if you need stable access.
 - **Netlify**: same as above, with publish directory `dist`.
 - **GitHub Pages**: add `base: '/Civilization-Evolution-Simulator/'` to `vite.config.ts` (otherwise `/assets/*` will 404), then publish via a Pages branch or an Actions workflow.
 - **Your own server / Nginx**: copy the contents of `dist/` to the site root. Since it is a single-page app, configure a fallback to `index.html`.

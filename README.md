@@ -2,6 +2,8 @@
 
 **简体中文** | [English](./README.en.md)
 
+**在线演示：<https://civilization-evolution-simulator.vercel.app/>** —— 无需安装，打开即玩。
+
 上帝视角的文明推演控制台。纪元自 **公元 2026 年** 的当代信息社会起算，多个文明体在**德、智、体、美、劳**五维驱动下自行演化；
 你可以随时以「神谕」调整五维与人口，查看并改写演化过程中自行涌现的法律体系与道德约束。
 
@@ -74,6 +76,8 @@ npm run dev     # 启动开发服务器
 `npm run build` 产出的 `dist/` 是**纯静态文件**，可托管在任何静态服务器上。
 
 - **Vercel**：导入本仓库，自动识别 Vite，Build Command `npm run build`，Output Directory `dist`，零配置。
+  本项目已部署于此：<https://civilization-evolution-simulator.vercel.app/>，推送到 `main` 分支后会自动重新构建上线。
+  提示：`*.vercel.app` 在大陆地区访问可能不稳定，如需长期稳定访问建议绑定自定义域名。
 - **Netlify**：同上，发布目录填 `dist`。
 - **GitHub Pages**：需在 `vite.config.ts` 补充 `base: '/Civilization-Evolution-Simulator/'`（否则 `/assets/*` 会 404），再通过 Pages 分支或 Actions 工作流发布。
 - **自有服务器 / Nginx**：将 `dist/` 内容放到站点根目录即可；单页应用建议配置 fallback 到 `index.html`。
